@@ -1,0 +1,12 @@
+node("ansible_docker"){
+    stage("Git checkout"){
+        git branch: 'main', url: 'https://github.com/Perovss/Jenkins.git'
+    }
+    stage("install Roles"){
+            sh 'ansible-galaxy install -r requirements.yml -p roles'
+    }
+    stage("Run playbook"){
+            sh 'ansible-playbook site.yml -i inventory/prod.yml'
+    }
+    }
+    
